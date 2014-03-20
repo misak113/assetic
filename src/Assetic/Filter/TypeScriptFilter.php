@@ -46,7 +46,8 @@ class TypeScriptFilter extends BaseNodeFilter
         mkdir($inputDirPath);
         file_put_contents($inputPath, $asset->getContent());
 
-        $pb->add($inputPath)->add('--out')->add($outputPath);
+		$realSourcePath = $asset->getSourceRoot().DIRECTORY_SEPARATOR.$asset->getSourcePath();
+		$pb->add($realSourcePath)->add('--out')->add($outputPath);
 
         $proc = $pb->getProcess();
         $code = $proc->run();
